@@ -31,6 +31,8 @@ export class BeachDetailComponent implements OnInit {
         this.beach = data;
         this.beach.imageUrl = `assets/image_beach/${data.id}.jpeg`;
         console.log('Beach', data);
+        console.log('Latitude: ', data.latitude);
+        console.log('Longitude: ', data.longitude);
       },
       error: (error) => {
         console.error('Error fetching beach: ', error);
@@ -38,11 +40,11 @@ export class BeachDetailComponent implements OnInit {
     });
   }
   openMaps(): void {
-    if (this.beach && this.beach.latitude && this.beach.longitude) {
-      const url = `https://www.google.com/maps/search/?api=1&query=${this.beach.latitude},${this.beach.longitude}`;
-      window.open(url, '_blank');
+    if (this.beach && this.beach.location) {
+      const url = this.beach.location;
+      window.open(url, 'blank');
     } else {
-      console.error('No coordinates available for this beach.');
+      console.error('No location available for this beach.');
     }
   }
 }
