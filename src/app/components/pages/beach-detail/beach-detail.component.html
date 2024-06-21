@@ -1,5 +1,13 @@
 <div *ngIf="beach" class="beach-detail">
+  <img
+    [src]="beach.imageUrl"
+    alt="{{ beach.name }}"
+    class="beach-detail-image"
+  />
   <h1>{{ beach.name }}</h1>
-  <h4>{{ beach.location }}</h4>
+  <h2>{{ beach.location }}</h2>
   <h4>{{ beach.id }}</h4>
+  <button (click)="openMaps()" class="open-maps-button">
+    Open in Google Maps
+  </button>
 </div>

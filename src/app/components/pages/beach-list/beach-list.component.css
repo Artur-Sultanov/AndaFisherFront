@@ -1,32 +1,25 @@
-.contact-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-.contact-container-green {
-  background: green;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-.contact-container-red {
-  background: red;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-.contact-container-red {
-  background: blue;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+/* beach-list.component.css */
+
+.beach-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(300px, 1fr)
+  ); /* Определяем 3 колонки с минимальной шириной 300px */
+  gap: 20px; /* Пространство между элементами */
+  justify-items: center; /* Центрируем элементы в колонках */
 }
 
-.contact-card {
-  background: #e7d0fd;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 10px;
-  border-radius: 20px;
-  margin: 10px;
+.beach-card {
+  max-width: 300px; /* Максимальная ширина карточки пляжа */
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.beach-card img {
+  max-width: 100%;
+  border-radius: 8px;
 }

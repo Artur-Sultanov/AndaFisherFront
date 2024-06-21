@@ -1,0 +1,26 @@
+.beach-detail {
+  background-color: #ffecb3;
+  padding: 45px;
+  margin: 20px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.beach-detail img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.beach-detail h1 {
+  font-size: 2em;
+  color: #f57c00;
+  margin: 0;
+}
+
+.beach-detail h4 {
+  font-size: 1.2em;
+  color: #f57c00;
+  margin: 10px 0 0;
+}

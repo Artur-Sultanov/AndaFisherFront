@@ -1,0 +1,79 @@
+<div class="harmony-haven">
+  <div class="language-selector">
+    <button (click)="setLanguage('ru')">Русский</button>
+    <button (click)="setLanguage('en')">English</button>
+    <button (click)="setLanguage('es')">Español</button>
+  </div>
+  <div class="text-content" [ngSwitch]="selectedLanguage">
+    <p *ngSwitchCase="'ru'">
+      Представьте себе пляж, где каждый элемент природы сотрудничает, чтобы
+      создать идеальное место для рыбалки. Нежное солнце раннего утра мягко
+      освещает бескрайний песчаный берег, а легкий морской бриз нежно касается
+      вашего лица, принося с собой свежий, солоноватый аромат моря. Песок под
+      ногами теплый и мягкий, он приятно шуршит с каждым вашим шагом. Вдали
+      виднеется спокойное море, его поверхность переливается всеми оттенками
+      синего — от бледно-голубого до глубокого индиго. Волны лениво облизывают
+      берег, оставляя после себя пенные узоры. Здесь, на этом пляже, время
+      кажется замедленным, и единственное, что нарушает тишину, — это ритмичное
+      плескание воды о берег и далекие крики чаек. Рядом с вами, на золотистом
+      песке, стоит ваша удочка, уже готовая к рыбалке. Вы чувствуете, как все
+      заботы и ежедневная рутина отступают, уступая место ощущению безмятежности
+      и душевного равновесия. Здесь, среди природы, вы находите свой внутренний
+      баланс и покой. Вы забрасываете удочку и наблюдаете за поплавком, который
+      покачивается на волнах, словно в такт вашим мыслям. Вокруг царит атмосфера
+      полной гармонии и единения с природой. Это место — идеальный уголок для
+      тех, кто ищет уединения и возможности насладиться простыми радостями
+      жизни, такими как рыбалка на рассвете. Такой пляж может стать вашим
+      убежищем от суеты, местом, где можно забыть обо всем на свете и просто
+      быть собой, наедине с природой и своими мыслями. Это место, куда хочется
+      возвращаться снова и снова.
+    </p>
+    <p *ngSwitchCase="'en'">
+      Imagine a beach where every element of nature collaborates to create the
+      perfect spot for fishing. The gentle early morning sun softly illuminates
+      the endless sandy shore, and a light sea breeze tenderly touches your
+      face, bringing with it the fresh, salty scent of the ocean. The sand under
+      your feet is warm and soft, whispering with each step you take. In the
+      distance, the calm sea glistens with shades of blue, from pale turquoise
+      to deep indigo. The waves lazily lick the shore, leaving behind frothy
+      patterns. Here, on this beach, time seems to slow down, and the only thing
+      that breaks the silence is the rhythmic lapping of water against the shore
+      and the distant cries of seagulls. Next to you, on the golden sand, stands
+      your fishing rod, ready for the day’s catch. You feel all worries and
+      daily routines fade away, replaced by a sense of tranquility and inner
+      balance. Here, amidst nature, you find your inner peace and equilibrium.
+      You cast your line and watch the float bobbing on the waves, as if in
+      rhythm with your thoughts. The atmosphere is one of complete harmony and
+      unity with nature. This place is the perfect haven for those seeking
+      solitude and the opportunity to enjoy life’s simple pleasures, like
+      fishing at dawn. This beach can be your refuge from the hustle and bustle,
+      a place where you can forget everything in the world and just be yourself,
+      alone with nature and your thoughts. It’s a place you’ll want to return to
+      again and again.
+    </p>
+    <p *ngSwitchCase="'es'">
+      Imagina una playa donde cada elemento de la naturaleza colabora para crear
+      el lugar perfecto para pescar. El suave sol de la mañana ilumina
+      delicadamente la interminable orilla arenosa, y una ligera brisa marina
+      toca tiernamente tu rostro, trayendo consigo el fresco y salado aroma del
+      océano. La arena bajo tus pies es cálida y suave, susurrando con cada paso
+      que das. A lo lejos, el mar tranquilo brilla con tonos de azul, desde el
+      turquesa pálido hasta el índigo profundo. Las olas lamen perezosamente la
+      orilla, dejando detrás patrones espumosos. Aquí, en esta playa, el tiempo
+      parece ralentizarse, y lo único que rompe el silencio es el ritmo del agua
+      chapoteando contra la orilla y los lejanos gritos de las gaviotas. Junto a
+      ti, sobre la arena dorada, está tu caña de pescar, lista para la captura
+      del día. Sientes que todas las preocupaciones y la rutina diaria se
+      desvanecen, reemplazadas por una sensación de tranquilidad y equilibrio
+      interior. Aquí, en medio de la naturaleza, encuentras tu paz interior y
+      equilibrio. Lanzas tu línea y observas el flotador balanceándose en las
+      olas, como si estuviera en ritmo con tus pensamientos. La atmósfera es de
+      completa armonía y unidad con la naturaleza. Este lugar es el refugio
+      perfecto para aquellos que buscan soledad y la oportunidad de disfrutar de
+      los placeres simples de la vida, como pescar al amanecer. Esta playa puede
+      ser tu refugio del ajetreo y el bullicio, un lugar donde puedes olvidarte
+      de todo en el mundo y simplemente ser tú mismo, solo con la naturaleza y
+      tus pensamientos. Es un lugar al que querrás volver una y otra vez.
+    </p>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { BeachListComponent } from './components/pages/beach-list/beach-list.com
 import { FishDetailComponent } from './components/pages/fish-detail/fish-detail.component';
 import { FishListComponent } from './components/pages/fish-list/fish-list.component';
 import { NgModule } from '@angular/core';
+import { HarmonyHavenComponent } from './components/pages/harmony-haven/harmony-haven.component';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,10 @@ export const routes: Routes = [
   {
     path: 'fish-list',
     component: FishListComponent,
+  },
+  {
+    path: 'harmony-haven',
+    component: HarmonyHavenComponent,
   },
 ];
 

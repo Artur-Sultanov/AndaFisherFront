@@ -1,15 +1,11 @@
-<div class="home-div-container">
-  <main class="home-main">
-    <div class="contact-container">
-      <div *ngFor="let beach of beaches" class="contact-card">
-        <a [routerLink]="['/beach-detail', beach.id]">
-          <div class="contact-header">
-            <h2>{{ beach.id }}</h2>
-            <h2>{{ beach.name }}</h2>
-            <h2>{{ beach.location }}</h2>
-          </div>
-        </a>
+<div class="beach-grid">
+  <div *ngFor="let beach of beaches" class="beach-card">
+    <a [routerLink]="['/beach-detail', beach.id]">
+      <img [src]="beach.imageUrl" alt="{{ beach.name }}" class="beach-image" />
+      <div class="beach-details">
+        <h2>{{ beach.name }}</h2>
+        <p>{{ beach.location }}</p>
       </div>
-    </div>
-  </main>
+    </a>
+  </div>
 </div>

@@ -29,11 +29,20 @@ export class BeachDetailComponent implements OnInit {
     this.beachService.getBeach(id).subscribe({
       next: (data) => {
         this.beach = data;
+        this.beach.imageUrl = `assets/image_beach/${data.id}.jpeg`;
         console.log('Beach', data);
       },
       error: (error) => {
         console.error('Error fetching beach: ', error);
       },
     });
+  }
+  openMaps(): void {
+    if (this.beach && this.beach.latitude && this.beach.longitude) {
+      const url = `https://www.google.com/maps/search/?api=1&query=${this.beach.latitude},${this.beach.longitude}`;
+      window.open(url, '_blank');
+    } else {
+      console.error('No coordinates available for this beach.');
+    }
   }
 }

@@ -1,4 +1,5 @@
 <div *ngIf="fish" class="beach-detail">
+  <img [src]="fish.imageUrl" alt="{{ fish.name }}" class="beach-detail-image" />
   <h1>{{ fish.name }}</h1>
-  <h4>{{ fish.id }}</h4>
+  <h2>id: {{ fish.id }}</h2>
 </div>

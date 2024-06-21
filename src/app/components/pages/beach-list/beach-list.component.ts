@@ -24,9 +24,10 @@ export class BeachListComponent implements OnInit {
   loadBeaches(): void {
     this.beachService.getBeaches().subscribe({
       next: (data) => {
-        console.log('data', data);
-
-        this.beaches = data;
+        this.beaches = data.map((beach: any) => ({
+          ...beach,
+          imageUrl: `assets/image_beach/${beach.id}.jpeg`,
+        }));
         console.log('Beaches: ', this.beaches);
       },
       error: (error) => {

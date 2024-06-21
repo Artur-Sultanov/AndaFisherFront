@@ -23,13 +23,15 @@ export class FishListComponent {
   loadFishes(): void {
     this.fishService.getFishes().subscribe({
       next: (data) => {
+        this.fishes = data.map((fish: any) => ({
+          ...fish,
+          imageUrl: `assets/image_fish/${fish.id}.jpeg`,
+        }));
         console.log('data', data);
-
-        this.fishes = data;
         console.log('Fishes: ', this.fishes);
       },
       error: (error) => {
-        console.error('Error fetching fish: ', error);
+        console.error('Error fetching fishes: ', error);
       },
     });
   }

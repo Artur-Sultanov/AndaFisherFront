@@ -29,7 +29,8 @@ export class FishDetailComponent implements OnInit {
     this.fishService.getFish(id).subscribe({
       next: (data) => {
         this.fish = data;
-        console.log('Beach', data);
+        this.fish.imageUrl = `assets/image_fish/${data.id}.jpeg`;
+        console.log('Fish', data);
       },
       error: (error) => {
         console.error('Error fetching fish: ', error);
