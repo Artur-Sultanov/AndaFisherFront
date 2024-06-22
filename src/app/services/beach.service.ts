@@ -18,9 +18,8 @@ export class BeachService {
   getBeach(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
-
   createBeach(beach: any): Observable<any> {
-    return this.http.post(this.apiUrl, beach);
+    return this.http.post(`${this.apiUrl}`, beach);
   }
 
   updateBeach(beach: any): Observable<any> {
