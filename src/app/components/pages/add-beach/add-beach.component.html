@@ -1,0 +1,36 @@
+<div class="container">
+  <h2>Create Beach</h2>
+  <form #beachForm="ngForm" (ngSubmit)="addBeach(beachForm)">
+    <div>
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        [(ngModel)]="beach.name"
+        name="name"
+        required
+      />
+    </div>
+    <div>
+      <label for="location">Location:</label>
+      <input
+        type="text"
+        id="location"
+        [(ngModel)]="beach.location"
+        name="location"
+        required
+      />
+    </div>
+    <div>
+      <label for="description">Description:</label>
+      <textarea
+        id="description"
+        [(ngModel)]="beach.description"
+        name="description"
+        required
+      ></textarea>
+    </div>
+    <button type="submit" [disabled]="beachForm.invalid">Create Beach</button>
+  </form>
+</div>
+ng
