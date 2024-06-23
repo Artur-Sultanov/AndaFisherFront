@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Delete Beach</h2>
+  <div class="beach-grid">
+    <div
+      *ngFor="let beach of beaches"
+      class="beach-card"
+      (click)="confirmDelete(beach.id)"
+    >
+      <img
+        [src]="'assets/image_beach/' + beach.id + '.jpeg'"
+        alt="{{ beach.name }}"
+        class="beach-image"
+      />
+      <div class="beach-details">
+        <h3>{{ beach.name }}</h3>
+        <p>{{ beach.description }}</p>
+        <p>ID: {{ beach.id }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для подтверждения удаления -->
+  <div *ngIf="showConfirmModal" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="cancelDelete()">&times;</span>
+      <p>Are you sure you want to delete this beach?</p>
+      <button (click)="deleteBeach()">Yes</button>
+      <button (click)="cancelDelete()">No</button>
+    </div>
+  </div>
+</div>
