@@ -6,6 +6,7 @@ import { FishListComponent } from './components/pages/fish-list/fish-list.compon
 import { NgModule } from '@angular/core';
 import { HarmonyHavenComponent } from './components/pages/harmony-haven/harmony-haven.component';
 import { AddBeachComponent } from './components/pages/add-beach/add-beach.component';
+import { EditBeachComponent } from './components/pages/edit-beach/edit-beach.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,10 @@ export const routes: Routes = [
   {
     path: 'add-beach',
     component: AddBeachComponent,
+  },
+  {
+    path: 'edit-beach',
+    component: EditBeachComponent,
   },
 ];
 

@@ -1,0 +1,49 @@
+<div class="container">
+  <h2>Edit Beach</h2>
+  <form #beachForm="ngForm" (ngSubmit)="editBeach(beachForm)">
+    <div class="form-group">
+      <label for="id">Id</label>
+      <input
+        type="text"
+        id="id"
+        name="id"
+        class="form-control"
+        [(ngModel)]="beach.id"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        class="form-control"
+        [(ngModel)]="beach.name"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input
+        type="text"
+        id="location"
+        name="location"
+        class="form-control"
+        [(ngModel)]="beach.location"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        name="description"
+        class="form-control"
+        [(ngModel)]="beach.description"
+        required
+      ></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
