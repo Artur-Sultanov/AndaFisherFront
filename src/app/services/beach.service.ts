@@ -22,7 +22,7 @@ export class BeachService {
     return this.http.post(`${this.apiUrl}`, beach);
   }
 
-  updateBeach(beach: any): Observable<any> {
+  updateBeach(id: number, beach: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${beach.id}`, beach);
   }
 
