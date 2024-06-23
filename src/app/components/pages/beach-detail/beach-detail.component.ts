@@ -12,6 +12,7 @@ import { BeachService } from '../../../services/beach.service';
 })
 export class BeachDetailComponent implements OnInit {
   beach: any;
+  fishes: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -23,6 +24,7 @@ export class BeachDetailComponent implements OnInit {
     console.log('id: ', id);
     if (id) {
       this.loadBeach(id);
+      this.loadFishes(id);
     }
   }
   loadBeach(id: string): void {
@@ -30,12 +32,19 @@ export class BeachDetailComponent implements OnInit {
       next: (data) => {
         this.beach = data;
         this.beach.imageUrl = `assets/image_beach/${data.id}.jpeg`;
-        console.log('Beach', data);
-        console.log('Latitude: ', data.latitude);
-        console.log('Longitude: ', data.longitude);
       },
       error: (error) => {
         console.error('Error fetching beach: ', error);
+      },
+    });
+  }
+  loadFishes(id: string): void {
+    this.beachService.getFishesByBeachId(id).subscribe({
+      next: (fishes) => {
+        this.fishes = fishes;
+      },
+      error: (error) => {
+        console.error('Error fetching fishes: ', error);
       },
     });
   }

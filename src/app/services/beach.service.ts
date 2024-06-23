@@ -33,4 +33,7 @@ export class BeachService {
   addFishToBeach(beachId: number, fishId: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/${beachId}/fish/${fishId}`, {});
   }
+  getFishesByBeachId(beachId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/beach/${beachId}/fish`);
+  }
 }
