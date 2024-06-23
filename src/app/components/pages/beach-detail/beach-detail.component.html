@@ -9,4 +9,18 @@
   <button (click)="openMaps()" class="open-maps-button">
     Open in Google Maps
   </button>
+
+  <div class="fish-list">
+    <div *ngFor="let fish of fishes" class="fish-card">
+      <img
+        [src]="'assets/image_fish/' + fish.id + '.jpeg'"
+        alt="{{ fish.name }}"
+        class="fish-image"
+      />
+      <div class="fish-details">
+        <h3>{{ fish.name }}</h3>
+        <p>{{ fish.description }}</p>
+      </div>
+    </div>
+  </div>
 </div>
