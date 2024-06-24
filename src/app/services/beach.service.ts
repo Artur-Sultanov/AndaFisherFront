@@ -30,7 +30,7 @@ export class BeachService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  addFishToBeach(beachId: number, fishId: number): Observable<any> {
+  addFishToBeach(beachId: string, fishId: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/${beachId}/fish/${fishId}`, {});
   }
   getFishesByBeachId(beachId: string): Observable<any[]> {

@@ -8,6 +8,8 @@ import { HarmonyHavenComponent } from './components/pages/harmony-haven/harmony-
 import { AddBeachComponent } from './components/pages/add-beach/add-beach.component';
 import { EditBeachComponent } from './components/pages/edit-beach/edit-beach.component';
 import { DeleteBeachComponent } from './components/pages/delete-beach/delete-beach.component';
+import { AddFishToBeachComponent } from './components/pages/add-fish-to-beach/add-fish-to-beach.component';
+import { AddFishToBeachListComponent } from './components/pages/add-fish-to-beach-list/add-fish-to-beach-list.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +44,14 @@ export const routes: Routes = [
   {
     path: 'delete-beach',
     component: DeleteBeachComponent,
+  },
+  {
+    path: 'add-fish-to-beach/:id',
+    component: AddFishToBeachComponent,
+  },
+  {
+    path: 'add-fish-to-beach-list/:id',
+    component: AddFishToBeachListComponent,
   },
 ];
 
