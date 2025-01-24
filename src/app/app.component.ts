@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { FooterLayoutComponent } from './components/layout/footer/footer.component';
-import { HeaderLayoutComponent } from './components/layout/header/header.component';
-import { NavLayoutComponent } from './components/layout/header/nav/nav.component';
+import { RouterOutlet } from '@angular/router'; // Для router-outlet
+import { HeaderLayoutComponent } from './shared/components/header/header.component'; // Для app-header
+import { FooterLayoutComponent } from './shared/components/footer/footer.component'; // Для app-footer
+import { NavLayoutComponent } from './shared/components/nav/nav.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'],
   imports: [
     RouterOutlet,
     FooterLayoutComponent,
