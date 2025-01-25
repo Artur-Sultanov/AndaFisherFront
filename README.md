@@ -1,27 +1,124 @@
-# AndaFisherF
+# Anda Fisher Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.4.
+## 🌊 Overview
 
-## Development server
+The **Anda Fisher** application is designed to manage beaches, fish species, and provide real-time weather data. The project has been refactored to include a clean modular structure, lazy-loaded routes, and optimized organization for scalability and maintainability.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+The backend for this project can be found here: [AndaFisher Backend Repository](https://github.com/Artur-Sultanov/AndaFisher.git)
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 🚀 Features
 
-## Build
+- **Lazy Loading**: Optimized routing for improved performance.
+- **Modular Structure**: Features split into standalone components and modules.
+- **Routing Configuration**: Dynamic routing for backend endpoints.
+- **Authentication**: JWT-based authentication integrated into routing.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## 🏗️ Project Structure
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+anda-fisher
+├── src
+│   ├── app
+│   │   ├── core
+│   │   │   ├── interceptors
+│   │   │   │   └── jwt.interceptor.ts
+│   │   ├── features
+│   │   │   ├── beaches
+│   │   │   │   ├── beaches.routes.ts
+│   │   │   │   └── pages
+│   │   │   ├── fish
+│   │   │   │   ├── fish.routes.ts
+│   │   │   │   └── pages
+│   │   │   └── auth
+│   │   │       ├── auth.routes.ts
+│   │   │       └── pages
+│   │   ├── shared
+│   │   │   ├── components
+│   │   │   │   ├── footer
+│   │   │   │   └── header
+│   │   └── app.component.ts
+│   │   └── app.routes.ts
+│   └── assets
+├── angular.json
+├── package.json
+├── README.md
+└── tsconfig.json
+```
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## 📦 Installation
 
-## Further help
+### Prerequisites
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Node.js v16+ and npm installed.
+- Angular CLI installed globally:
+  ```bash
+  npm install -g @angular/cli
+  ```
+
+### Steps
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+   cd anda-fisher
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   ng serve
+   ```
+
+4. Open the application in your browser at:
+   ```
+   http://localhost:4200
+   ```
+
+---
+
+## 🌐 Routing Overview
+
+### **Backend Endpoints**
+
+| Path       | Description                       |
+| ---------- | --------------------------------- |
+| `/beaches` | Manages beaches (CRUD operations) |
+| `/fish`    | Manages fish species              |
+| `/auth`    | Authentication (login/register)   |
+
+---
+
+## 🛠️ Development
+
+### Add a New Feature
+
+1. Create a new directory under `src/app/features`.
+2. Define lazy-loaded routes for the feature in `feature-name.routes.ts`.
+3. Implement standalone components in the `pages` directory.
+
+### Add a Shared Component
+
+1. Add the component under `src/app/shared/components`.
+2. Export the component as standalone.
+3. Import it into the required parent component.
+
+---
+
+## 📝 License
+
+## This project is licensed under the [MIT License](LICENSE).
+
+**Developed by Anda Fisher Team** 🌊🐟
