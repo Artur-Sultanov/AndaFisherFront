@@ -29,4 +29,11 @@ export const beachesRoutes: Routes = [
         (m) => m.EditBeachComponent
       ),
   },
+  {
+    path: 'map',
+    loadComponent: () =>
+      import('./pages/beach-map/beach-map.component').then(
+        (m) => m.BeachMapComponent
+      ),
+  },
 ];

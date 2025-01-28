@@ -1,0 +1,10 @@
+<div *ngIf="loading" class="loading">Loading weather data...</div>
+<div *ngIf="weather" class="weather-info">
+  <h3>Weather for {{ weather.location }}:</h3>
+  <p><strong>Condition:</strong> {{ weather.description }}</p>
+  <p><strong>Temperature:</strong> {{ weather.temperature }}°C</p>
+  <p><strong>Feels like:</strong> {{ weather.feelsLike }}°C</p>
+  <p><strong>Wind:</strong> {{ weather.windSpeed }} m/s</p>
+  <p><strong>Humidity:</strong> {{ weather.humidity }}%</p>
+  <img [src]="weather.iconUrl" alt="Weather icon" />
+</div>
