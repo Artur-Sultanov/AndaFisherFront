@@ -26,25 +26,30 @@ anda-fisher
 │   │   ├── core
 │   │   │   ├── interceptors
 │   │   │   │   └── jwt.interceptor.ts
+│   │   │   └──  services
+│   │   │       ├── auth.service.ts
+│   │   │       ├── beach.service.ts
+│   │   │       └── fish.service.ts
 │   │   ├── features
 │   │   │   ├── beaches
 │   │   │   │   ├── beaches.routes.ts
 │   │   │   │   └── pages
+│   │   │   │       ├── beach-list
+│   │   │   │       ├── beach-detail
+│   │   │   │       └── beach-map
 │   │   │   ├── fish
 │   │   │   │   ├── fish.routes.ts
 │   │   │   │   └── pages
 │   │   │   ├── auth
 │   │   │   │   ├── auth.routes.ts
 │   │   │   │   └── pages
-│   │   │   ├── map
-│   │   │       ├── map.component.ts
-│   │   │       ├── map.component.html
-│   │   │       └── map.component.css
+│   │   │   └── weather
+│   │   │       └── weather.component.ts
 │   │   ├── shared
 │   │   │   ├── components
 │   │   │   │   ├── footer
 │   │   │   │   └── header
-│   │   └── app.component.ts
+│   │   ├── app.component.ts
 │   │   └── app.routes.ts
 │   └── assets
 ├── angular.json
@@ -97,11 +102,13 @@ anda-fisher
 
 ### **Backend Endpoints**
 
-| Path       | Description                       |
-| ---------- | --------------------------------- |
-| `/beaches` | Manages beaches (CRUD operations) |
-| `/fish`    | Manages fish species              |
-| `/auth`    | Authentication (login/register)   |
+| Path          | Description                            |
+|--------------|----------------------------------|
+| `/beaches`    | Manages beaches (CRUD operations) |
+| `/beaches/map` | Provides beach location data      |
+| `/fish`       | Manages fish species              |
+| `/weather`    | Provides real-time weather info   |
+| `/auth`       | Authentication (login/register)   |
 
 ---
 
@@ -121,13 +128,36 @@ anda-fisher
 
 ---
 
-## ✅ Planned Features
+## 🏡 Interactive Beach Map
 
-- Add Preloading Strategy with 'withPreloading' to optimize lazy-loaded module performance.
-- Integrate Google Maps API for route generation.
-- Display beach locations on a map using Leaflet.js.
-- Add dynamic popups with beach details and images on the map.
-- Implement filters for displaying beaches based on water type, location, and name.
+The beach map integrates **Leaflet.js** to display interactive markers for each beach location. Users can:
+- View detailed information about each beach.
+- See real-time weather conditions.
+- Click on map markers to access beach descriptions and images.
+
+To navigate to the beach map, go to:
+```
+http://localhost:4200/beaches/map
+```
+
+---
+
+## 🌧️ Weather Forecast Integration
+
+The weather component fetches real-time weather data for each beach location. Weather information is displayed in:
+- Beach detail pages.
+- The interactive beach map popup.
+- A compact weather widget.
+
+---
+
+## 🏆 Future Improvements
+
+- **User Reviews & Ratings** for beaches.
+- **Route Planning** using Google Maps API.
+- **Fishing Hotspots** visualization on the map.
+- **Social Features** for sharing locations and experiences.
+- **Mobile Optimization** for better UX on smaller screens.9
 
 ---
 
