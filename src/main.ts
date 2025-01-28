@@ -4,6 +4,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 import { jwtInterceptor } from './app/core/interceptors/jwt.interceptor';
+import 'leaflet/dist/leaflet.css';
 
 bootstrapApplication(AppComponent, {
   providers: [

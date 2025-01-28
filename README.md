@@ -33,9 +33,13 @@ anda-fisher
 │   │   │   ├── fish
 │   │   │   │   ├── fish.routes.ts
 │   │   │   │   └── pages
-│   │   │   └── auth
-│   │   │       ├── auth.routes.ts
-│   │   │       └── pages
+│   │   │   ├── auth
+│   │   │   │   ├── auth.routes.ts
+│   │   │   │   └── pages
+│   │   │   ├── map
+│   │   │       ├── map.component.ts
+│   │   │       ├── map.component.html
+│   │   │       └── map.component.css
 │   │   ├── shared
 │   │   │   ├── components
 │   │   │   │   ├── footer
@@ -114,6 +118,16 @@ anda-fisher
 1. Add the component under `src/app/shared/components`.
 2. Export the component as standalone.
 3. Import it into the required parent component.
+
+---
+
+## ✅ Planned Features
+
+- Add Preloading Strategy with 'withPreloading' to optimize lazy-loaded module performance.
+- Integrate Google Maps API for route generation.
+- Display beach locations on a map using Leaflet.js.
+- Add dynamic popups with beach details and images on the map.
+- Implement filters for displaying beaches based on water type, location, and name.
 
 ---
 

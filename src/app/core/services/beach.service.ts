@@ -7,33 +7,40 @@ import { Observable } from 'rxjs';
 })
 export class BeachService {
   private apiUrl = 'http://localhost:8081/api/beaches';
-  private http = inject(HttpClient);
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getBeaches(): Observable<any> {
-    return this.http.get(this.apiUrl);
+  getBeaches(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}`);
   }
 
-  getBeach(id: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
+  getBeachById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
+
   createBeach(beach: any): Observable<any> {
     return this.http.post(`${this.apiUrl}`, beach);
   }
 
   updateBeach(id: number, beach: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${beach.id}`, beach);
+    return this.http.put<any>(`${this.apiUrl}/${id}`, beach);
   }
 
-  deleteBeach(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  deleteBeach(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 
-  addFishToBeach(beachId: string, fishId: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${beachId}/fish/${fishId}`, {});
+  getBeachImageUrl(imagePath: string): string {
+    return `http://localhost:8081/uploads/images/beaches/${imagePath}`;
   }
-  getFishesByBeachId(beachId: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/beach/${beachId}/fish`);
+
+  getBeachesForMap(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:8081/api/beaches/map');
+  }
+
+  getWeatherForBeach(beachId: number): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:8081/api/beaches/${beachId}/weather`
+    );
   }
 }

@@ -1,0 +1,12 @@
+#map {
+  height: 440px; /* Исправленный размер */
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9; /* Светлый фон карты (опционально) */
+}
+
+.leaflet-marker-icon {
+  background: none !important; /* Убирает фон маркера */
+  border: none !important; /* Убирает возможные рамки */
+}
