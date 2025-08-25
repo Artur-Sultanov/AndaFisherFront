@@ -1,7 +1,16 @@
-<app-layout-header />
-<router-outlet />
-<main class="content">
-  <router-outlet></router-outlet>
-</main>
+<body>
+  <!-- Хедер -->
+  <header>
+    <app-layout-header></app-layout-header>
+  </header>
 
-<app-layout-footer></app-layout-footer>
+  <!-- Основное содержимое -->
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Футер -->
+  <footer>
+    <app-layout-footer></app-layout-footer>
+  </footer>
+</body>

@@ -1,26 +1,25 @@
-<div *ngIf="beach" class="beach-detail">
+<div *ngIf="loading" class="loading">Loading beach details...</div>
+<div *ngIf="beach">
+  <h2>{{ beach.name }}</h2>
+  <p>{{ beach.description }}</p>
   <img
-    [src]="beach.imageUrl"
-    alt="{{ beach.name }}"
-    class="beach-detail-image"
+    *ngIf="beach.imagePath"
+    [src]="'http://localhost:8081/uploads/images/' + beach.imagePath"
+    [alt]="beach.name"
   />
-  <h1>{{ beach.name }}</h1>
-  <h2>{{ beach.description }}</h2>
-  <button (click)="openMaps()" class="open-maps-button">
-    Open in Google Maps
-  </button>
 
-  <div class="fish-list">
-    <div *ngFor="let fish of fishes" class="fish-card">
-      <img
-        [src]="'assets/image_fish/' + fish.id + '.jpeg'"
-        alt="{{ fish.name }}"
-        class="fish-image"
-      />
-      <div class="fish-details">
-        <h3>{{ fish.name }}</h3>
-        <p>{{ fish.description }}</p>
-      </div>
-    </div>
+  <div class="additional-info">
+    <p><strong>Location:</strong> {{ beach.location }}</p>
+    <p><strong>Water Type:</strong> {{ beach.waterType }}</p>
   </div>
+</div>
+
+<div *ngIf="weather" class="weather-info">
+  <h3>Weather:</h3>
+  <p><strong>Condition:</strong> {{ weather.description }}</p>
+  <p><strong>Temperature:</strong> {{ weather.temperature }}°C</p>
+  <p><strong>Feels like:</strong> {{ weather.feelsLike }}°C</p>
+  <p><strong>Wind:</strong> {{ weather.windSpeed }} m/s</p>
+  <p><strong>Humidity:</strong> {{ weather.humidity }}%</p>
+  <img [src]="weather.iconUrl" alt="Weather icon" />
 </div>

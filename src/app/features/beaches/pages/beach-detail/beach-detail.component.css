@@ -1,83 +1,22 @@
-.beach-detail {
-  background-color: #ffecb3;
-  padding: 45px;
-  margin: 20px 0;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.beach-detail img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-.beach-detail h1 {
-  font-size: 2em;
-  color: #f57c00;
-  margin: 0;
-}
-
-.beach-detail h2 {
-  font-size: 1.5em;
-  color: #333;
-  margin: 10px 0;
-}
-
-.open-maps-button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 20px; /* Отступ сверху для кнопки */
-  margin-bottom: 20px; /* Отступ снизу для кнопки */
-}
-
-.open-maps-button:hover {
-  background-color: #0056b3;
-}
-
-.fish-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.fish-card {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px; /* Отступ снизу для карточек рыб */
-}
-
-.fish-card .fish-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-.fish-card .fish-details {
-  padding: 10px;
+.loading {
+  font-size: 1.5rem;
   text-align: center;
 }
 
-.fish-card h3 {
-  font-size: 1.2em;
-  margin: 5px 0;
+.beach-detail {
+  text-align: center;
 }
 
-.fish-card p {
-  font-size: 1em;
-  color: #666;
-  margin: 5px 0;
+.beach-image {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.error {
+  font-size: 1.2rem;
+  color: red;
+  text-align: center;
 }

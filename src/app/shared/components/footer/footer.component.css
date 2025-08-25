@@ -1,17 +1,19 @@
 footer {
   text-align: center;
-  background-color: #f8f9fa;
-  padding: 0.5rem;
-  font-size: 0.8rem;
-  border-top: 1px solid #ddd;
+  background-color: #375a3c; /* Dark Green - естественный тон */
+  padding: 10px;
+  font-size: 0.9rem;
+  color: white;
+  border-top: 2px solid #a1c181; /* Soft Green */
 }
 
 footer a {
-  color: #007bff;
+  color: #53a8b6; /* Turquoise - напоминает воду */
   text-decoration: none;
   margin: 0 5px;
 }
 
 footer a:hover {
   text-decoration: underline;
+  color: #e3c16f; /* Warm Sand */
 }

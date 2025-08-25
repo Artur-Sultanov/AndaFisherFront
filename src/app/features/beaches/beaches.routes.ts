@@ -7,6 +7,7 @@ export const beachesRoutes: Routes = [
       import('./pages/beach-list/beach-list.component').then(
         (m) => m.BeachListComponent
       ),
+    pathMatch: 'full',
   },
   {
     path: ':id',

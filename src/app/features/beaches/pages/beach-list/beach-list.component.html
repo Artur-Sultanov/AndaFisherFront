@@ -1,12 +1,14 @@
-<div class="beach-grid">
-  <div *ngFor="let beach of beaches" class="beach-card">
-    <a [routerLink]="['/beach-detail', beach.id]">
-      <img [src]="beach.imageUrl" alt="{{ beach.name }}" class="beach-image" />
-      <div class="beach-details">
-        <h2>{{ beach.name }}</h2>
-        <p>{{ beach.description }}</p>
-        <p>ID: {{ beach.id }}</p>
-      </div>
-    </a>
-  </div>
-</div>
+<ul *ngIf="!loading && beaches.length > 0" class="beach-list">
+  <li *ngFor="let beach of beaches" class="beach-item">
+    <img
+      [src]="imageBaseUrl + beach.imagePath"
+      alt="{{ beach.name }}"
+      class="beach-image"
+    />
+    <h3>
+      <a [routerLink]="['/beaches', beach.id]">{{ beach.name }}</a>
+    </h3>
+    <p>{{ beach.description }}</p>
+    <span>Location: {{ beach.location }}</span>
+  </li>
+</ul>

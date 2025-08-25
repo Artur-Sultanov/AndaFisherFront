@@ -1,18 +1,19 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BeachService } from '../../../../core/services/beach.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-beach-detail',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './beach-detail.component.html',
-  styleUrl: './beach-detail.component.css',
+  styleUrls: ['./beach-detail.component.css'],
 })
 export class BeachDetailComponent implements OnInit {
-  beach: any;
-  fishes: any[] = [];
+  beach: any = null;
+  weather: any = null;
+  loading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,40 +21,32 @@ export class BeachDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    console.log('id: ', id);
-    if (id) {
-      this.loadBeach(id);
-      this.loadFishes(id);
-    }
+    const beachId = this.route.snapshot.params['id'];
+    this.loadBeachDetails(beachId);
+    this.loadWeatherDetails(beachId);
   }
-  loadBeach(id: string): void {
-    this.beachService.getBeach(id).subscribe({
-      next: (data) => {
+
+  private loadBeachDetails(beachId: number): void {
+    this.beachService.getBeachById(beachId).subscribe(
+      (data) => {
         this.beach = data;
-        this.beach.imageUrl = `assets/image_beach/${data.id}.jpeg`;
+        this.loading = false;
       },
-      error: (error) => {
-        console.error('Error fetching beach: ', error);
-      },
-    });
+      (error) => {
+        console.error('Error fetching beach details:', error);
+        this.loading = false;
+      }
+    );
   }
-  loadFishes(id: string): void {
-    this.beachService.getFishesByBeachId(id).subscribe({
-      next: (fishes) => {
-        this.fishes = fishes;
+
+  private loadWeatherDetails(beachId: number): void {
+    this.beachService.getWeatherForBeach(beachId).subscribe(
+      (data) => {
+        this.weather = data;
       },
-      error: (error) => {
-        console.error('Error fetching fishes: ', error);
-      },
-    });
-  }
-  openMaps(): void {
-    if (this.beach && this.beach.location) {
-      const url = this.beach.location;
-      window.open(url, 'blank');
-    } else {
-      console.error('No location available for this beach.');
-    }
+      (error) => {
+        console.error('Error fetching weather details:', error);
+      }
+    );
   }
 }

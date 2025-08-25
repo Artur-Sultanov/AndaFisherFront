@@ -7,6 +7,7 @@ export const fishRoutes: Routes = [
       import('./pages/fish-list/fish-list.component').then(
         (m) => m.FishListComponent
       ),
+    pathMatch: 'full',
   },
   {
     path: ':id',
