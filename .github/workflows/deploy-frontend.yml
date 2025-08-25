@@ -1,0 +1,32 @@
+name: Deploy frontend
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH to EC2 and rebuild only frontend
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          port: ${{ secrets.EC2_PORT }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            set -e
+
+            echo "Pull latest frontend repo"
+            cd "${{ secrets.FRONTEND_DIR }}"
+            git pull --rebase
+
+            echo "Build only frontend & restart its container"
+            cd "${{ secrets.BACKEND_DIR }}"
+            docker compose --env-file "${{ secrets.ENV_FILE }}" build frontend
+            docker compose --env-file "${{ secrets.ENV_FILE }}" up -d frontend
+
+            echo "Done. Containers:"
+            docker ps
