@@ -1,0 +1,50 @@
+name: Deploy backend (and rebuild stack)
+
+on:
+  push:
+    branches: [ "main" ]     # деплой при пуше в main
+  workflow_dispatch:          # возможность запустить руками в Actions
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    # чтобы параллельные запуски не накладывались
+    concurrency:
+      group: deploy-backend
+      cancel-in-progress: true
+
+    steps:
+      - name: SSH to EC2 and deploy backend + frontend
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}        # 52.90.90.224
+          username: ${{ secrets.EC2_USER }}     # ec2-user
+          port: ${{ secrets.EC2_PORT }}         # 22
+          key: ${{ secrets.EC2_SSH_KEY }}       # приватный ключ (.pem) целиком
+          script_stop: true
+          script: |
+            set -euo pipefail
+
+            echo "==> Pull latest BACKEND"
+            cd "${{ secrets.BACKEND_DIR }}"
+            git fetch --all
+            git checkout main
+            git pull --rebase
+
+            echo "==> Pull latest FRONTEND"
+            cd "${{ secrets.FRONTEND_DIR }}"
+            git fetch --all
+            git checkout main
+            git pull --rebase
+
+            echo "==> Rebuild & restart stack"
+            cd "${{ secrets.BACKEND_DIR }}"
+            docker compose --env-file "${{ secrets.ENV_FILE }}" pull
+            docker compose --env-file "${{ secrets.ENV_FILE }}" up -d --build
+
+            echo "==> Cleanup old images (optional)"
+            docker image prune -f --filter "until=24h"
+
+            echo "==> Done. Current containers:"
+            docker ps
