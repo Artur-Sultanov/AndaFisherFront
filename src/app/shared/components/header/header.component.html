@@ -1,21 +1,34 @@
 <header class="header">
-  <div class="header-content">
-    <div class="logo">
-      <a href="/"><img src="/assets/logo.jpeg" alt="BeachFinder Logo" /></a>
-    </div>
-    <nav class="nav">
-      <ul>
-        <li><a href="/beach-list">Beaches</a></li>
-        <li><a href="/fish-list">Fishes</a></li>
-        <li><a href="/add-beach">Add new beach</a></li>
-        <li><a href="/edit-beach">Edit beach</a></li>
-        <li><a href="/delete-beach">Delete beach</a></li>
-        <li><a href="/add-fish-to-beach-list/:id">Add fish to beach</a></li>
-        <li><a href="/harmony-haven">Harmony Haven</a></li>
-      </ul>
-    </nav>
-    <div class="user-profile">
-      <a href="/login">Login</a>
-    </div>
+  <div class="logo">
+    <img src="/assets/logo.jpeg" alt="Anda Fisher Logo" />
+    <h1>Anda Fisher</h1>
   </div>
+
+  <nav class="nav">
+    <a routerLink="/beaches" routerLinkActive="active">Beaches</a>
+    <a routerLink="/map" routerLinkActive="active">Map</a>
+    <a routerLink="/fish" routerLinkActive="active">Fish</a>
+    <a routerLink="/weather" routerLinkActive="active">Weather</a>
+  </nav>
+
+  <div class="auth-buttons">
+    <button *ngIf="!isAuthenticated" (click)="login()">Login</button>
+    <button *ngIf="isAuthenticated" (click)="logout()">Logout</button>
+  </div>
+
+  <button class="burger-menu" (click)="toggleMenu()">☰</button>
 </header>
+
+<!-- Mobile Navigation -->
+<nav class="mobile-nav" *ngIf="menuOpen">
+  <a routerLink="/beaches" routerLinkActive="active" (click)="toggleMenu()"
+    >Beaches</a
+  >
+  <a routerLink="/map" routerLinkActive="active" (click)="toggleMenu()">Map</a>
+  <a routerLink="/fish" routerLinkActive="active" (click)="toggleMenu()"
+    >Fish</a
+  >
+  <a routerLink="/weather" routerLinkActive="active" (click)="toggleMenu()"
+    >Weather</a
+  >
+</nav>

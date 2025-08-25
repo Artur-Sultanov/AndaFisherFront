@@ -2,6 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { BeachService } from '../../../../core/services/beach.service';
 
+// Решение для внешних иконок (чтобы не тянуть их из node_modules)
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
+  iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+});
+
 @Component({
   selector: 'app-beach-map',
   standalone: true,

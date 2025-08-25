@@ -1,11 +1,8 @@
 import { Routes } from '@angular/router';
+import { BeachMapComponent } from './features/beaches/pages/beach-map/beach-map.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'beaches',
-    pathMatch: 'full',
-  },
+  { path: '', component: BeachMapComponent, pathMatch: 'full' },
   {
     path: 'beaches',
     loadChildren: () =>
@@ -16,4 +13,12 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./features/fish/fish.routes').then((m) => m.fishRoutes),
   },
+  {
+    path: 'map',
+    loadComponent: () =>
+      import('./features/beaches/pages/beach-map/beach-map.component').then(
+        (m) => m.BeachMapComponent
+      ),
+  },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
