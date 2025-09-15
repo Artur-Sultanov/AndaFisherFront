@@ -3,51 +3,71 @@ name: Deploy backend (and rebuild stack)
 on:
   push:
     branches: [ "main" ]     # деплой при пуше в main
-  workflow_dispatch:          # возможность запустить руками в Actions
+  workflow_dispatch:          # ручной запуск из Actions
+
+concurrency:
+  group: deploy-stack         # общий с фронтовым деплоем, чтобы не пересекались
+  cancel-in-progress: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
 
-    # чтобы параллельные запуски не накладывались
-    concurrency:
-      group: deploy-backend
-      cancel-in-progress: true
+    permissions:
+      contents: read
 
     steps:
+      - name: Quick TCP check to port 22
+        run: |
+          echo "Host: ${{ secrets.EC2_HOST }}"
+          timeout 5 bash -lc 'cat < /dev/null > /dev/tcp/${{ secrets.EC2_HOST }}/${{ secrets.EC2_PORT }}' \
+            && echo "✅ Port 22 reachable from runner" \
+            || (echo "❌ Port 22 NOT reachable from runner" && exit 1)
+
       - name: SSH to EC2 and deploy backend + frontend
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.EC2_HOST }} 
-          username: ${{ secrets.EC2_USER }}    
-          port: ${{ secrets.EC2_PORT }}        
-          key: ${{ secrets.EC2_SSH_KEY }} 
-          timeout: "3m"              # коннект
-          command_timeout: "45m"     # выполнение скрипта
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          port: ${{ secrets.EC2_PORT }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          timeout: "3m"              # время на установление SSH
+          command_timeout: "45m"     # время на выполнение команд
           script_stop: true
           debug: true
           script: |
             set -euo pipefail
 
-            echo "==> Pull latest BACKEND"
-            cd "${{ secrets.BACKEND_DIR }}"
-            git fetch --all
-            git checkout main
-            git pull --rebase
+            log(){ printf "\n==> %s\n" "$*"; }
+            retry(){ for i in 1 2 3 4 5; do "$@" && return 0; sleep $((i*5)); done; return 1; }
 
-            echo "==> Pull latest FRONTEND"
-            cd "${{ secrets.FRONTEND_DIR }}"
-            git fetch --all
-            git checkout main
-            git pull --rebase
+            : "${BACKEND_DIR:=${{ secrets.BACKEND_DIR }}}"
+            : "${FRONTEND_DIR:=${{ secrets.FRONTEND_DIR }}}"
+            : "${ENV_FILE:=${{ secrets.ENV_FILE }}}"
+            : "${BRANCH:=main}"
 
-            echo "==> Rebuild & restart stack"
-            cd "${{ secrets.BACKEND_DIR }}"
-            docker compose --env-file "${{ secrets.ENV_FILE }}" pull
-            docker compose --env-file "${{ secrets.ENV_FILE }}" up -d --build
+            log "Pull latest BACKEND"
+            git -C "$BACKEND_DIR" config --global --add safe.directory "$BACKEND_DIR" || true
+            retry git -C "$BACKEND_DIR" fetch --all --prune
+            git  -C "$BACKEND_DIR" checkout "$BRANCH"
+            retry git -C "$BACKEND_DIR" pull --rebase --autostash
 
-            echo "==> Cleanup old images (optional)"
-            docker image prune -f --filter "until=24h"
+            log "Pull latest FRONTEND"
+            git -C "$FRONTEND_DIR" config --global --add safe.directory "$FRONTEND_DIR" || true
+            retry git -C "$FRONTEND_DIR" fetch --all --prune
+            git  -C "$FRONTEND_DIR" checkout "$BRANCH"
+            retry git -C "$FRONTEND_DIR" pull --rebase --autostash
 
-            echo "==> Done. Current containers:"
-            docker ps
+            log "Rebuild & restart stack"
+            cd "$BACKEND_DIR"
+            docker compose --env-file "$ENV_FILE" pull || true
+            docker compose --env-file "$ENV_FILE" build --progress=plain
+            docker compose --env-file "$ENV_FILE" up -d
+
+            log "Cleanup (light)"
+            docker image prune -f --filter "until=24h" || true
+            docker logs --tail 100 $(docker ps -q) >/dev/null 2>&1 || true
+
+            log "Done. Current containers"
+            docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"
