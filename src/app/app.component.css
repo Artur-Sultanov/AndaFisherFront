@@ -9,28 +9,12 @@ html {
   flex-direction: column;
 }
 
-/* 📌 Хедер */
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: #2a628f;
-  color: white;
-  z-index: 1000;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
 /* 📌 Основной контент */
 main {
   flex-grow: 1;
-  margin-top: 60px; /* Отступ под фиксированный хедер */
+  margin-top: 100px; /* Отступ под фиксированный хедер */
   padding: 20px;
-  min-height: calc(100vh - 100px); /* Учитываем футер */
+  min-height: calc(100vh - 140px); /* Учитываем футер */
 }
 
 /* 📌 Футер */
