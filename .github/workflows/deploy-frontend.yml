@@ -16,6 +16,10 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           port: ${{ secrets.EC2_PORT }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          timeout: "3m"              # время на установку SSH
+          command_timeout: "40m"     # время на выполнение команд (увеличили!)
+          debug: true
+          script_stop: true
           script: |
             set -e
 
