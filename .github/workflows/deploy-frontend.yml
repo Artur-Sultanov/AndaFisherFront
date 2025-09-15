@@ -5,10 +5,24 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 
+concurrency:
+  group: deploy-stack
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
+
     steps:
+      - name: Quick TCP check to port 22
+        run: |
+          echo "Host: ${{ secrets.EC2_HOST }}"
+          # 5 секунд на попытку
+          timeout 5 bash -lc 'cat < /dev/null > /dev/tcp/${{ secrets.EC2_HOST }}/${{ secrets.EC2_PORT }}' \
+            && echo "✅ Port 22 reachable from runner" \
+            || (echo "❌ Port 22 NOT reachable from runner" && exit 1)
+
       - name: SSH to EC2 and rebuild only frontend
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -17,11 +31,11 @@ jobs:
           port: ${{ secrets.EC2_PORT }}
           key: ${{ secrets.EC2_SSH_KEY }}
           timeout: "3m"              # время на установку SSH
-          command_timeout: "45m"     # время на выполнение команд (увеличили!)
+          command_timeout: "45m"     # время на выполнение команд
           debug: true
           script_stop: true
           script: |
-            set -e
+            set -euo pipefail
 
             echo "Pull latest frontend repo"
             cd "${{ secrets.FRONTEND_DIR }}"
@@ -29,8 +43,8 @@ jobs:
 
             echo "Build only frontend & restart its container"
             cd "${{ secrets.BACKEND_DIR }}"
-            docker compose --env-file "${{ secrets.ENV_FILE }}" build frontend
+            docker compose --env-file "${{ secrets.ENV_FILE }}" build --progress=plain frontend
             docker compose --env-file "${{ secrets.ENV_FILE }}" up -d frontend
 
             echo "Done. Containers:"
-            docker ps
+            docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"
