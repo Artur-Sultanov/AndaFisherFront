@@ -23,7 +23,7 @@ jobs:
           port: ${{ secrets.EC2_PORT }}        
           key: ${{ secrets.EC2_SSH_KEY }} 
           timeout: "3m"              # коннект
-          command_timeout: "40m"     # выполнение скрипта
+          command_timeout: "45m"     # выполнение скрипта
           script_stop: true
           debug: true
           script: |
