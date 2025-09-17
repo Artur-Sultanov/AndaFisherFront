@@ -31,4 +31,15 @@ button:hover {
 button:disabled {
   background-color: #999;
   cursor: not-allowed;
-} /* You can add global styles to this file, and also import other style files */
+}
+
+/* Override Leaflet's default icon path to use locally served assets. */
+.leaflet-default-icon-path {
+  background-image: url('/assets/leaflet/marker-icon.png');
+}
+
+.leaflet-marker-icon.leaflet-interactive {
+  background-size: cover;
+}
+
+/* You can add global styles to this file, and also import other style files */
