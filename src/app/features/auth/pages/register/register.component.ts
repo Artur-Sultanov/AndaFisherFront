@@ -37,7 +37,7 @@ export class RegisterComponent {
       return;
     }
 
-    this.authService.registerUser(this.registerForm.value).subscribe({
+    this.authService.register(this.registerForm.value).subscribe({
       next: () => {
         alert('✅ Registration successful! You can now log in.');
         this.router.navigate(['/auth/login']);
