@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-layout-header',
@@ -16,6 +17,11 @@ export class HeaderLayoutComponent {
 
   constructor(private authService: AuthService, private router: Router) {
     this.isAuthenticated = this.authService.isLoggedIn();
+    this.authService.authState$
+      .pipe(takeUntilDestroyed())
+      .subscribe((user) => {
+        this.isAuthenticated = !!user || this.authService.isAuthenticated();
+      });
   }
 
   toggleMenu() {
@@ -29,7 +35,9 @@ export class HeaderLayoutComponent {
 
   logout() {
     this.menuOpen = false;
-    this.authService.logout();
-    this.router.navigate(['/']);
+    this.authService.logout().subscribe({
+      next: () => this.router.navigate(['/']),
+      error: () => this.router.navigate(['/']),
+    });
   }
 }
