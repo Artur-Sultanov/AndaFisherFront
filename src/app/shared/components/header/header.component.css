@@ -1,8 +1,9 @@
 /* Основной стиль хедера */
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
   padding: 15px 20px;
   background: #2a628f; /* Deep Blue - цвет воды */
   color: white;
@@ -11,7 +12,16 @@
   top: 0;
   left: 0;
   z-index: 1000;
+  box-sizing: border-box;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: auto;
+  flex: 1;
 }
 
 /* Логотип */
@@ -19,6 +29,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .logo img {
@@ -35,6 +46,10 @@
 .nav {
   display: flex;
   gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex: 1;
 }
 
 .nav a {
@@ -55,7 +70,9 @@
 /* Кнопки аутентификации */
 .auth-buttons {
   display: flex;
+  align-items: center;
   gap: 10px;
+  margin-left: auto;
 }
 
 .auth-buttons button {
@@ -81,18 +98,20 @@
   font-size: 2rem;
   cursor: pointer;
   color: white;
+  flex-shrink: 0;
 }
 
 /* Мобильное меню */
 .mobile-nav {
   display: none;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   top: 100px;
   left: 0;
   width: 100%;
   background: #2a628f; /* Deep Blue */
   padding: 15px 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .mobile-nav a {
@@ -102,8 +121,30 @@
   display: block;
 }
 
+.mobile-auth-buttons {
+  display: none;
+  gap: 10px;
+  justify-content: flex-end;
+  padding: 10px 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 10px;
+}
+
+.mobile-auth-buttons button {
+  flex: 0 1 auto;
+  min-width: 120px;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
+  .header {
+    gap: 16px;
+  }
+
+  .header-right {
+    gap: 16px;
+  }
+
   .nav {
     display: none;
   }
@@ -114,5 +155,21 @@
 
   .mobile-nav {
     display: flex;
+  }
+
+  .mobile-auth-buttons {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-right {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .auth-buttons {
+    width: 100%;
+    justify-content: flex-end;
   }
 }
