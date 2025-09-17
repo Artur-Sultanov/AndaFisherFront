@@ -1,52 +1,111 @@
 <div class="register-container">
-  <h2>Sign Up</h2>
+  <h2>Create an Account</h2>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <label for="username">Username:</label>
+    <label for="username">Username</label>
     <input id="username" formControlName="username" type="text" required />
     <div
-      *ngIf="
-        registerForm.controls.username.invalid &&
-        registerForm.controls.username.touched
-      "
+      *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched"
+      class="error"
     >
       <small>⚠️ Username must be at least 3 characters long</small>
     </div>
+    <div *ngIf="fieldErrors['username']?.length" class="error">
+      <small *ngFor="let message of fieldErrors['username']">{{ message }}</small>
+    </div>
 
-    <label for="email">Email:</label>
+    <label for="email">Email</label>
     <input id="email" formControlName="email" type="email" required />
     <div
-      *ngIf="
-        registerForm.controls.email.invalid &&
-        registerForm.controls.email.touched
-      "
+      *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+      class="error"
     >
       <small>⚠️ Enter a valid email address</small>
     </div>
+    <div *ngIf="fieldErrors['email']?.length" class="error">
+      <small *ngFor="let message of fieldErrors['email']">{{ message }}</small>
+    </div>
 
-    <label for="phone">Phone Number:</label>
+    <label for="phone">Phone Number</label>
     <input id="phone" formControlName="phoneNumber" type="text" required />
     <div
       *ngIf="
-        registerForm.controls.phoneNumber.invalid &&
-        registerForm.controls.phoneNumber.touched
+        registerForm.get('phoneNumber')?.invalid &&
+        registerForm.get('phoneNumber')?.touched
       "
+      class="error"
     >
       <small>⚠️ Enter a valid phone number</small>
     </div>
+    <div *ngIf="fieldErrors['phoneNumber']?.length" class="error">
+      <small *ngFor="let message of fieldErrors['phoneNumber']">
+        {{ message }}
+      </small>
+    </div>
 
-    <label for="password">Password:</label>
+    <label for="password">Password</label>
     <input id="password" formControlName="password" type="password" required />
     <div
       *ngIf="
-        registerForm.controls.password.invalid &&
-        registerForm.controls.password.touched
+        registerForm.get('password')?.invalid &&
+        registerForm.get('password')?.touched
       "
+      class="error"
     >
-      <small>⚠️ Password must be at least 6 characters long</small>
+      <small *ngIf="registerForm.get('password')?.hasError('required')">
+        ⚠️ Password is required
+      </small>
+      <small
+        *ngIf="registerForm.get('password')?.hasError('passwordComplexity') &&
+        !registerForm.get('password')?.hasError('required')"
+      >
+        ⚠️ Password must be at least 8 characters and include a letter, number,
+        and special symbol
+      </small>
+    </div>
+    <div *ngIf="fieldErrors['password']?.length" class="error">
+      <small *ngFor="let message of fieldErrors['password']">{{ message }}</small>
     </div>
 
-    <button type="submit" [disabled]="registerForm.invalid">Register</button>
+    <label for="confirmPassword">Confirm Password</label>
+    <input
+      id="confirmPassword"
+      formControlName="confirmPassword"
+      type="password"
+      required
+    />
+    <div
+      *ngIf="
+        registerForm.get('confirmPassword')?.invalid &&
+        registerForm.get('confirmPassword')?.touched
+      "
+      class="error"
+    >
+      <small *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
+        ⚠️ Please confirm your password
+      </small>
+      <small
+        *ngIf="registerForm.get('confirmPassword')?.hasError('passwordMismatch') &&
+        !registerForm.get('confirmPassword')?.hasError('required')"
+      >
+        ⚠️ Passwords do not match
+      </small>
+    </div>
+    <div *ngIf="fieldErrors['confirmPassword']?.length" class="error">
+      <small *ngFor="let message of fieldErrors['confirmPassword']">
+        {{ message }}
+      </small>
+    </div>
+
+    <button type="submit" [disabled]="registerForm.invalid || isSubmitting">
+      <span *ngIf="isSubmitting" class="spinner" aria-hidden="true"></span>
+      <span>{{ isSubmitting ? 'Creating account...' : 'Register' }}</span>
+    </button>
 
     <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
   </form>
+
+  <p class="auth-link">
+    Already have an account?
+    <a routerLink="/auth/login">Sign in</a>
+  </p>
 </div>

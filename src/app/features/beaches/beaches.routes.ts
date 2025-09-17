@@ -8,6 +8,7 @@ export const beachesRoutes: Routes = [
         (m) => m.BeachListComponent
       ),
     pathMatch: 'full',
+    data: { public: true },
   },
   {
     path: ':id',
@@ -15,6 +16,7 @@ export const beachesRoutes: Routes = [
       import('./pages/beach-detail/beach-detail.component').then(
         (m) => m.BeachDetailComponent
       ),
+    data: { public: true },
   },
   {
     path: 'add',
@@ -36,5 +38,6 @@ export const beachesRoutes: Routes = [
       import('./pages/beach-map/beach-map.component').then(
         (m) => m.BeachMapComponent
       ),
+    data: { public: true },
   },
 ];
