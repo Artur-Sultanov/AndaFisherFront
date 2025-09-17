@@ -23,10 +23,12 @@ export class HeaderLayoutComponent {
   }
 
   login() {
+    this.menuOpen = false;
     this.router.navigate(['/auth/login']);
   }
 
   logout() {
+    this.menuOpen = false;
     this.authService.logout();
     this.router.navigate(['/']);
   }

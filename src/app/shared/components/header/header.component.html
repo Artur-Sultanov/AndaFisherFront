@@ -5,19 +5,22 @@
     <p>CI/CD test</p>
   </div>
 
-  <nav class="nav">
-    <a routerLink="/beaches" routerLinkActive="active">Beaches</a>
-    <a routerLink="/map" routerLinkActive="active">Map</a>
-    <a routerLink="/fish" routerLinkActive="active">Fish</a>
-    <a routerLink="/weather" routerLinkActive="active">Weather</a>
-  </nav>
+  <div class="header-right">
+    <nav class="nav">
+      <a routerLink="/beaches" routerLinkActive="active">Beaches</a>
+      <a routerLink="/map" routerLinkActive="active">Map</a>
+      <a routerLink="/fish" routerLinkActive="active">Fish</a>
+      <a routerLink="/weather" routerLinkActive="active">Weather</a>
+    </nav>
 
-  <div class="auth-buttons">
-    <button *ngIf="!isAuthenticated" (click)="login()">Login</button>
-    <button *ngIf="isAuthenticated" (click)="logout()">Logout</button>
+    <div class="auth-buttons">
+      <ng-container
+        *ngTemplateOutlet="isAuthenticated ? logoutButton : loginButton"
+      ></ng-container>
+    </div>
+
+    <button class="burger-menu" type="button" (click)="toggleMenu()">☰</button>
   </div>
-
-  <button class="burger-menu" (click)="toggleMenu()">☰</button>
 </header>
 
 <!-- Mobile Navigation -->
@@ -32,4 +35,18 @@
   <a routerLink="/weather" routerLinkActive="active" (click)="toggleMenu()"
     >Weather</a
   >
+
+  <div class="mobile-auth-buttons">
+    <ng-container
+      *ngTemplateOutlet="isAuthenticated ? logoutButton : loginButton"
+    ></ng-container>
+  </div>
 </nav>
+
+<ng-template #loginButton>
+  <button type="button" (click)="login()">Login</button>
+</ng-template>
+
+<ng-template #logoutButton>
+  <button type="button" (click)="logout()">Logout</button>
+</ng-template>
