@@ -24,20 +24,34 @@ export class HeaderLayoutComponent {
       });
   }
 
-  toggleMenu() {
+  toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
   }
 
-  login() {
-    this.menuOpen = false;
+  login(): void {
+    this.closeMenu();
     this.router.navigate(['/auth/login']);
   }
 
-  logout() {
-    this.menuOpen = false;
+  register(): void {
+    this.closeMenu();
+    this.router.navigate(['/auth/register']);
+  }
+
+  goToProfile(): void {
+    this.closeMenu();
+    this.router.navigate(['/profile']);
+  }
+
+  logout(): void {
+    this.closeMenu();
     this.authService.logout().subscribe({
       next: () => this.router.navigate(['/']),
       error: () => this.router.navigate(['/']),
     });
+  }
+
+  private closeMenu(): void {
+    this.menuOpen = false;
   }
 }

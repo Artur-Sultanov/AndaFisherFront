@@ -1,10 +1,17 @@
 import { Routes } from '@angular/router';
 import { BeachMapComponent } from './features/beaches/pages/beach-map/beach-map.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: BeachMapComponent, pathMatch: 'full' },
   {
+    path: 'auth',
+    loadChildren: () =>
+      import('./features/auth/auth.routes').then((m) => m.authRoutes),
+  },
+  {
     path: 'beaches',
+    canActivateChild: [AuthGuard],
     loadChildren: () =>
       import('./features/beaches/beaches.routes').then((m) => m.beachesRoutes),
   },

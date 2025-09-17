@@ -14,12 +14,15 @@
     </nav>
 
     <div class="auth-buttons">
-      <ng-container
-        *ngTemplateOutlet="isAuthenticated ? logoutButton : loginButton"
-      ></ng-container>
+      <ng-container *ngIf="isAuthenticated; else loggedOut">
+        <button type="button" (click)="goToProfile()">Profile</button>
+        <button type="button" (click)="logout()">Logout</button>
+      </ng-container>
     </div>
 
-    <button class="burger-menu" type="button" (click)="toggleMenu()">☰</button>
+    <button class="burger-menu" type="button" (click)="toggleMenu()">
+      ☰
+    </button>
   </div>
 </header>
 
@@ -37,16 +40,19 @@
   >
 
   <div class="mobile-auth-buttons">
-    <ng-container
-      *ngTemplateOutlet="isAuthenticated ? logoutButton : loginButton"
-    ></ng-container>
+    <ng-container *ngIf="isAuthenticated; else mobileLoggedOut">
+      <button type="button" (click)="goToProfile()">Profile</button>
+      <button type="button" (click)="logout()">Logout</button>
+    </ng-container>
   </div>
 </nav>
 
-<ng-template #loginButton>
+<ng-template #loggedOut>
   <button type="button" (click)="login()">Login</button>
+  <button type="button" class="secondary" (click)="register()">Register</button>
 </ng-template>
 
-<ng-template #logoutButton>
-  <button type="button" (click)="logout()">Logout</button>
+<ng-template #mobileLoggedOut>
+  <button type="button" (click)="login()">Login</button>
+  <button type="button" class="secondary" (click)="register()">Register</button>
 </ng-template>
